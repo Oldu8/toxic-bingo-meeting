@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import HomeScreen from '../components/HomeScreen.tsx'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <HomeScreen />
   </main>
 </template>

@@ -1,0 +1,34 @@
+.home-screen {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+}
+
+.phrase-input input {
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #ff5e5e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff3b3b;
+}
