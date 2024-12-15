@@ -12,7 +12,11 @@ export default defineComponent({
     const phrases = ref(Array(slotsCount.value).fill(''))
 
     const updateSlotsCount = () => {
-      phrases.value = Array(slotsCount.value).fill('')
+      const currentPhrases = phrases.value.slice(0, slotsCount.value)
+      phrases.value = [
+        ...currentPhrases,
+        ...Array(slotsCount.value - currentPhrases.length).fill(''),
+      ]
     }
 
     // Validation: Check if all inputs are filled
@@ -22,13 +26,14 @@ export default defineComponent({
 
     const createGame = () => {
       if (isValid.value) {
-        const gameData = {
-          gameName: gameName.value,
-          slotsCount: slotsCount.value,
-          phrases: phrases.value,
-        }
-        console.log('Game Data:', gameData)
-        router.push('/game')
+        router.push({
+          path: '/game',
+          query: {
+            gameName: gameName.value,
+            slotsCount: String(slotsCount.value), // Convert to string for query
+            phrases: JSON.stringify(phrases.value), // Convert array to string
+          },
+        })
       } else {
         console.log('Please fill in all fields!')
       }

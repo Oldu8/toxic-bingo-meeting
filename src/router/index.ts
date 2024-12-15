@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-// import GameScreen from '../components/GameScreen.vue'
+import GameView from '@/views/GameView.vue'
 // import ResultsScreen from '../components/ResultsScreen.vue'
 
 // Define routes
 const routes = [
   { path: '/', component: HomeView },
-  // { path: '/game', component: GameScreen },
+  { path: '/game', component: GameView },
   // { path: '/results', component: ResultsScreen },
 ]
 
