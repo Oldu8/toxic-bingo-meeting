@@ -109,7 +109,6 @@ export default defineComponent({
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-    <!-- Header -->
     <header class="flex flex-col w-full max-w-4xl mb-8">
       <h1 class="text-3xl font-bold text-center mb-4">{{ gameName }}</h1>
       <div class="flex items-center justify-between">
@@ -131,7 +130,7 @@ export default defineComponent({
       <div
         v-for="(phrase, index) in phrases"
         :key="index"
-        class="cell flex items-center justify-center border border-gray-300 rounded-md cursor-pointer aspect-square"
+        class="flex items-center justify-center border border-gray-300 rounded-md cursor-pointer aspect-square"
         :class="getClassByClicks(squareCounts[index])"
         @click="handleSquareClick(index)"
       >
@@ -157,11 +156,6 @@ export default defineComponent({
 <style scoped>
 .square-clicked {
   animation: pulse 0.3s ease-in-out;
-}
-
-.cell {
-  min-width: 80px;
-  max-width: 100px;
 }
 
 .bg-0 {
