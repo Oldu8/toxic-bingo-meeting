@@ -36,9 +36,9 @@ export default defineComponent({
 
     const formattedTime = computed(() => {
       const duration = dayjs.duration(timer.value, 'seconds')
-      const hours = Math.floor(duration.asHours()) // Get the hour component
-      const minutes = duration.minutes() // Get the minute component
-      const seconds = duration.seconds() // Get the second component
+      const hours = Math.floor(duration.asHours())
+      const minutes = duration.minutes()
+      const seconds = duration.seconds()
 
       // Ensure hours, minutes, and seconds are always two digits
       return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
@@ -63,7 +63,7 @@ export default defineComponent({
       console.log('Game Ended')
       console.log('Results:', squareCounts)
 
-      if (timerInterval) clearInterval(timerInterval) // Stop the timer
+      if (timerInterval) clearInterval(timerInterval)
 
       router.push({
         path: '/results',
@@ -126,18 +126,23 @@ export default defineComponent({
 
     <div
       :style="{ gridTemplateColumns: `repeat(${columns}, 1fr)` }"
-      class="grid gap-2 w-full max-w-4xl aspect-square bg-white shadow-md p-2"
+      class="grid gap-2 w-full max-w-4xl bg-white shadow-md p-2"
     >
       <div
         v-for="(phrase, index) in phrases"
         :key="index"
-        class="flex items-center justify-center border border-gray-300 rounded-md cursor-pointer"
+        class="cell flex items-center justify-center border border-gray-300 rounded-md cursor-pointer aspect-square"
         :class="getClassByClicks(squareCounts[index])"
         @click="handleSquareClick(index)"
       >
-        <div class="flex flex-col items-center justify-center gap-4">
-          <p class="text-center text-xl font-medium">{{ phrase }}</p>
-          <p class="text-center text-md">
+        <div class="flex flex-col items-center justify-center gap-2 w-full p-2">
+          <p
+            class="text-center text-sm md:text-lg font-medium truncate w-full"
+            title="{{ phrase }}"
+          >
+            {{ phrase }}
+          </p>
+          <p class="text-center text-xs md:text-sm">
             Clicks:
             <strong>
               {{ squareCounts[index] }}
@@ -150,9 +155,13 @@ export default defineComponent({
 </template>
 
 <style scoped>
-/* Animation for the first click */
 .square-clicked {
   animation: pulse 0.3s ease-in-out;
+}
+
+.cell {
+  min-width: 80px;
+  max-width: 100px;
 }
 
 .bg-0 {

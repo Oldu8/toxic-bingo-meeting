@@ -42,10 +42,9 @@ export default defineComponent({
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-    <!-- Header -->
     <header class="flex flex-col w-full max-w-4xl mb-8">
       <h1 class="text-3xl font-bold text-center mb-4">{{ gameName }}</h1>
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col items-center justify-between md:flex-row gap-2 md:gap-0">
         <p class="text-lg">Time: {{ formattedTime }}</p>
         <p class="text-lg">Score: {{ totalScore }}</p>
         <button
@@ -57,7 +56,6 @@ export default defineComponent({
       </div>
     </header>
 
-    <!-- Phrases List -->
     <div class="flex flex-col w-full max-w-4xl bg-white shadow-md rounded-lg p-4">
       <h2 class="text-2xl font-semibold mb-4">Results</h2>
       <div
@@ -65,8 +63,10 @@ export default defineComponent({
         :key="index"
         class="flex items-center justify-between border-b py-2"
       >
-        <span class="text-lg">{{ phraseObj.phrase }}</span>
-        <span class="text-lg font-bold">{{ phraseObj.clicks }} Clicks</span>
+        <span class="text-md md:text-lg">{{ phraseObj.phrase }}</span>
+        <span class="text-sm md:text-lg"
+          ><strong>{{ phraseObj.clicks }}</strong> Clicks</span
+        >
       </div>
     </div>
   </div>
