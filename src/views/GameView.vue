@@ -1,15 +1,21 @@
 <script lang="ts">
 import { defineComponent, computed, reactive, ref, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 
 dayjs.extend(duration)
 
+type PhraseData = {
+  phrase: string
+  clicks: number
+}
+
 export default defineComponent({
   name: 'GameView',
   setup() {
     const route = useRoute()
+    const router = useRouter()
 
     // Game Data from Route
     const gameData = reactive(route.query || {})
@@ -49,15 +55,34 @@ export default defineComponent({
       if (timerInterval) clearInterval(timerInterval)
     })
 
-    // Click Handler
     const handleSquareClick = (index: number) => {
       squareCounts[index]++
     }
 
-    // End Game
     const endGame = () => {
       console.log('Game Ended')
       console.log('Results:', squareCounts)
+
+      if (timerInterval) clearInterval(timerInterval) // Stop the timer
+
+      router.push({
+        path: '/results',
+        query: {
+          gameName: gameName.value,
+          time: timer.value.toString(),
+          score: totalScore.value,
+          phrases: JSON.stringify(
+            phrases.value
+              .map(
+                (phrase: string, index: number): PhraseData => ({
+                  phrase,
+                  clicks: squareCounts[index],
+                }),
+              )
+              .sort((a: PhraseData, b: PhraseData) => b.clicks - a.clicks),
+          ),
+        },
+      })
     }
 
     const getClassByClicks = (clicks: number) => {

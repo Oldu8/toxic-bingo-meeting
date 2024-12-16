@@ -61,6 +61,7 @@ export default defineComponent({
         type="text"
         placeholder="Enter game name"
         v-model="gameName"
+        maxlength="180"
         class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
       />
     </div>
